@@ -24,18 +24,18 @@ LaravelとVue.jsを利用したCSVファイルアップロードシステムで�
 ---
 
 📂ファイルの構造
-├── app/
-│   └── Http/Controllers/Employee/FileUploadController.php
-├── resources/
-│   └── js/
-│       └── components/FileUpload.vue
-│   └── views/
-│       └── employee
-│           └── fileUploadIndex.blade.php
-├── routes/
-│   └── web.php
-├── database/
-│   └── migrations/
-│       └── 2024_XX_XX_create_employee_info_file_table.php
-└── storage/
-    └── app/uploads/
+├── app/  
+│   └── Http/Controllers/Employee/FileUploadController.php  
+├── resources/  
+│   └── js/  
+│       └── components/FileUpload.vue  
+│   └── views/  
+│       └── employee  
+│           └── fileUploadIndex.blade.php  
+├── routes/  
+│   └── web.php  
+├── database/  
+│   └── migrations/  
+│       └── 2024_XX_XX_create_employee_info_file_table.php  
+└── storage/  
+    └── app/uploads/  
