@@ -23,12 +23,6 @@
         <!-- ファイルリスト -->
         <div class="col-span-full">
             <dt class="text-sm/6 font-medium font-semibold text-gray-900">ファイルリスト</dt>
-            <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-600 ring-1 ring-blue-500/10 ring-inset hover:bg-blue-100 font-semibold"
-            v-if="fileList.length > 0"
-            @click="submitForm()"
-            >保存する</span>
-            <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset" disabled 
-            v-else>保存する</span>
             <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
                 <li class="flex items-center justify-between py-4 pr-5 pl-4 text-sm/6"
                 v-for="(item, index) in fileList" :key="index">
@@ -41,8 +35,9 @@
                     </div>
                 </li>
             </ul>
-        </div>        
+        </div>
     </div>
+    <div v-html="fileContent"></div>
 </template>
 
 <script>
@@ -51,6 +46,7 @@ import axios from 'axios'
         data(){
             return {
                 fileList: [],
+                fileContent: ''
             }
         },
         methods:{
@@ -59,9 +55,13 @@ import axios from 'axios'
                 this.fileImport(files);
             },
             fileImport(files) {
-                if(!files.length) return;
+                if( !files.length || files.length != 1 ) {
+                    alert('ファイルは一つずつアップロードしてください。');
+                    return false;
+                }
                 if(this.checkExt(files) !== true) return;
                 this.fileList.push(...files);
+                this.submitForm();
             },
             submitForm() {
                 const formData = new FormData();
@@ -75,8 +75,7 @@ import axios from 'axios'
                 })
                     .then(res => {
                         if( res.data.success == true ) {
-                            alert('アップロードに成功しました。');
-                            this.fileList.splice(0);
+                            this.fileContent = res.data.html;
                         } else {
                             alert(res.data.message);
                         }
@@ -103,6 +102,7 @@ import axios from 'axios'
             removeFile( file, idx ) {
                 if(confirm('['+file.name+']を削除しますか？')) {
                     this.fileList.splice(idx, 1);
+                    this.fileContent = '';
                 }
             }
         },
