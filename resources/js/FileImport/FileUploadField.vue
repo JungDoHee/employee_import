@@ -1,5 +1,6 @@
 <template>
     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <a href="files/employee_infomation.CSV">例えはこちら</a>
         <!-- ドラッグ＆ドロップ領域 -->
         <div class="col-span-full">
             <label for="cover-photo" class="block text-sm/6 font-medium font-semibold text-gray-900">CSV添付</label>
